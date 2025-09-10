@@ -1,0 +1,9 @@
+C:\Users\joshu\source\repos\MunicipalServiceApp\MunicipalServiceApp\bin\Debug\MunicipalServiceApp.exe.config
+C:\Users\joshu\source\repos\MunicipalServiceApp\MunicipalServiceApp\bin\Debug\MunicipalServiceApp.exe
+C:\Users\joshu\source\repos\MunicipalServiceApp\MunicipalServiceApp\bin\Debug\MunicipalServiceApp.pdb
+C:\Users\joshu\source\repos\MunicipalServiceApp\MunicipalServiceApp\obj\Debug\MunicipalServiceApp.csproj.AssemblyReference.cache
+C:\Users\joshu\source\repos\MunicipalServiceApp\MunicipalServiceApp\obj\Debug\MunicipalServiceApp.Properties.Resources.resources
+C:\Users\joshu\source\repos\MunicipalServiceApp\MunicipalServiceApp\obj\Debug\MunicipalServiceApp.csproj.GenerateResource.cache
+C:\Users\joshu\source\repos\MunicipalServiceApp\MunicipalServiceApp\obj\Debug\MunicipalServiceApp.csproj.CoreCompileInputs.cache
+C:\Users\joshu\source\repos\MunicipalServiceApp\MunicipalServiceApp\obj\Debug\MunicipalServiceApp.exe
+C:\Users\joshu\source\repos\MunicipalServiceApp\MunicipalServiceApp\obj\Debug\MunicipalServiceApp.pdb
