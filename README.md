@@ -62,7 +62,7 @@ The Municipal Services Portal enables residents to:
 #### Method 1: Using Visual Studio IDE (Recommended)
 1. **Clone or Download the Project**:
    ```bash
-   git clone <repository-url>
+   git clone (https://github.com/Notz05/ST10272691-MunicipalServicesApp-PROG7312.git)
    cd MunicipalServiceApp
    ```
 
@@ -230,29 +230,20 @@ The application includes sample categories and validation rules for testing:
 ### Getting Help
 - **Documentation**: Refer to this README for comprehensive information
 - **Code Comments**: Detailed inline documentation throughout the codebase
-- **Issue Categories**: Use the built-in help system for category guidance
 
 ### Technical Support
 For technical issues or questions:
-1. Check the troubleshooting section above
-2. Review the project structure and code comments
-3. Ensure all system requirements are met
-4. Contact your local municipality for service-related questions
+1. Review the project structure and code comments
+2. Ensure all system requirements are met
 
 ## 📄 License
 
 This project is developed for educational purposes as part of a Portfolio of Evidence (PoE) for municipal services improvement in South Africa.
 
-## 🙏 Acknowledgments
-
-- **South African Municipalities**: For inspiring the need for digital transformation
-- **Citizens**: For their continued engagement in community improvement
-- **Educational Institution**: For providing the framework for this project
-
 ---
 
 **Version**: 1.0.0  
-**Last Updated**: September 2024  
+**Last Updated**: September 2025 
 **Developed By**: Municipal Services Development Team  
 **Target Framework**: .NET Framework 4.8  
 
