@@ -8,6 +8,16 @@ namespace MunicipalServiceApp
     public partial class Form1 : Form
     {
         private IssueManager issueManager;
+        private Label statsLabel;
+
+        // White and blue color palette
+        private readonly Color DarkBlue = Color.FromArgb(13, 71, 161);      // Dark blue
+        private readonly Color MediumBlue = Color.FromArgb(25, 118, 210);   // Medium blue
+        private readonly Color LightBlue = Color.FromArgb(33, 150, 243);    // Light blue
+        private readonly Color AccentBlue = Color.FromArgb(63, 81, 181);    // Accent blue
+        private readonly Color PureWhite = Color.White;                     // Pure white
+        private readonly Color LightGray = Color.FromArgb(245, 245, 245);
+        private readonly Color DarkText = Color.FromArgb(33, 33, 33);
 
         public Form1()
         {
@@ -16,22 +26,45 @@ namespace MunicipalServiceApp
             SetupMainMenu();
         }
 
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+            UpdateStatsLabel();
+        }
+
+        private void UpdateStatsLabel()
+        {
+            if (statsLabel != null)
+            {
+                statsLabel.Text = $"Total Issues Reported: {issueManager.GetTotalIssueCount()}";
+            }
+        }
+
         private void SetupMainMenu()
         {
             // Set form properties
             this.Text = "Municipal Services Portal - South Africa";
-            this.Size = new Size(900, 750);
+            this.Size = new Size(1000, 800);
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.BackColor = Color.FromArgb(240, 248, 255); // Light blue background
+            this.BackColor = Color.FromArgb(248, 250, 252); // Light background
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
 
             // Create header panel
             Panel headerPanel = new Panel
             {
-                Size = new Size(880, 120),
+                Size = new Size(980, 120),
                 Location = new Point(10, 10),
-                BackColor = Color.FromArgb(25, 118, 210), // Professional blue
+                BackColor = DarkBlue,
+                BorderStyle = BorderStyle.None
+            };
+
+            // Add blue accent bar
+            Panel accentBar = new Panel
+            {
+                Size = new Size(980, 4),
+                Location = new Point(0, 0),
+                BackColor = LightBlue,
                 BorderStyle = BorderStyle.None
             };
 
@@ -49,32 +82,32 @@ namespace MunicipalServiceApp
             // Header subtitle
             Label subtitleLabel = new Label
             {
-                Text = "Connecting Citizens with Municipal Services",
+                Text = "Connecting South African Communities with Municipal Services",
                 Font = new Font("Segoe UI", 12, FontStyle.Regular),
-                ForeColor = Color.FromArgb(200, 230, 255),
-                Size = new Size(400, 25),
+                ForeColor = Color.FromArgb(200, 255, 200),
+                Size = new Size(500, 25),
                 Location = new Point(20, 65),
                 BackColor = Color.Transparent
             };
 
             // Statistics label
-            Label statsLabel = new Label
+            statsLabel = new Label
             {
                 Text = $"Total Issues Reported: {issueManager.GetTotalIssueCount()}",
                 Font = new Font("Segoe UI", 10, FontStyle.Regular),
                 ForeColor = Color.White,
                 Size = new Size(200, 20),
-                Location = new Point(650, 75),
+                Location = new Point(750, 75),
                 BackColor = Color.Transparent,
                 TextAlign = ContentAlignment.MiddleRight
             };
 
-            headerPanel.Controls.AddRange(new Control[] { titleLabel, subtitleLabel, statsLabel });
+            headerPanel.Controls.AddRange(new Control[] { accentBar, titleLabel, subtitleLabel, statsLabel });
 
             // Create main content panel
             Panel contentPanel = new Panel
             {
-                Size = new Size(880, 500),
+                Size = new Size(980, 580),
                 Location = new Point(10, 140),
                 BackColor = Color.White,
                 BorderStyle = BorderStyle.FixedSingle
@@ -85,8 +118,8 @@ namespace MunicipalServiceApp
             {
                 Text = "Welcome to the Municipal Services Portal\n\nSelect a service below to get started:",
                 Font = new Font("Segoe UI", 14, FontStyle.Regular),
-                ForeColor = Color.FromArgb(33, 33, 33),
-                Size = new Size(800, 80),
+                ForeColor = DarkText,
+                Size = new Size(900, 80),
                 Location = new Point(40, 30),
                 BackColor = Color.Transparent,
                 TextAlign = ContentAlignment.TopLeft
@@ -95,7 +128,7 @@ namespace MunicipalServiceApp
             // Service buttons container
             Panel buttonsPanel = new Panel
             {
-                Size = new Size(800, 350),
+                Size = new Size(900, 420),
                 Location = new Point(40, 120),
                 BackColor = Color.Transparent
             };
@@ -105,7 +138,7 @@ namespace MunicipalServiceApp
                 "🚨 Report Issues",
                 "Report municipal issues and service requests",
                 new Point(20, 20),
-                Color.FromArgb(76, 175, 80), // Green
+                MediumBlue,
                 true
             );
             reportIssuesBtn.Click += ReportIssuesBtn_Click;
@@ -114,7 +147,7 @@ namespace MunicipalServiceApp
             Button localEventsBtn = CreateServiceButton(
                 "📅 Local Events & Announcements",
                 "View upcoming events and municipal announcements",
-                new Point(360, 20),
+                new Point(320, 20),
                 Color.FromArgb(158, 158, 158), // Gray
                 false
             );
@@ -123,24 +156,45 @@ namespace MunicipalServiceApp
             Button serviceStatusBtn = CreateServiceButton(
                 "📋 Service Request Status",
                 "Track the status of your submitted requests",
-                new Point(20, 180),
+                new Point(620, 20),
                 Color.FromArgb(158, 158, 158), // Gray
                 false
             );
+
+            // View Reports button (new feature)
+            Button viewReportsBtn = CreateServiceButton(
+                "📊 View My Reports",
+                "View all your submitted issue reports",
+                new Point(20, 180),
+                DarkBlue,
+                true
+            );
+            viewReportsBtn.Click += ViewReportsBtn_Click;
 
             // Help button (active)
             Button helpBtn = CreateServiceButton(
                 "❓ Help & Support",
                 "Get help and support information",
-                new Point(360, 180),
-                Color.FromArgb(33, 150, 243), // Blue
+                new Point(320, 180),
+                LightBlue,
                 true
             );
             helpBtn.Click += HelpBtn_Click;
 
+            // Emergency Services button (new)
+            Button emergencyBtn = CreateServiceButton(
+                "🚑 Emergency Services",
+                "Quick access to emergency contacts",
+                new Point(620, 180),
+                Color.FromArgb(183, 28, 28), // Red for emergency
+                true
+            );
+            emergencyBtn.Click += EmergencyBtn_Click;
+
             // Add buttons to the buttons panel instead of directly to form
             buttonsPanel.Controls.AddRange(new Control[] { 
-                reportIssuesBtn, localEventsBtn, serviceStatusBtn, helpBtn 
+                reportIssuesBtn, localEventsBtn, serviceStatusBtn, 
+                viewReportsBtn, helpBtn, emergencyBtn 
             });
 
             contentPanel.Controls.AddRange(new Control[] { welcomeLabel, buttonsPanel });
@@ -148,9 +202,9 @@ namespace MunicipalServiceApp
             // Footer panel
             Panel footerPanel = new Panel
             {
-                Size = new Size(880, 40),
-                Location = new Point(10, 700),
-                BackColor = Color.FromArgb(245, 245, 245),
+                Size = new Size(980, 40),
+                Location = new Point(10, 730),
+                BackColor = LightGray,
                 BorderStyle = BorderStyle.FixedSingle
             };
 
@@ -159,7 +213,7 @@ namespace MunicipalServiceApp
                 Text = "© 2025 Municipal Services Portal - Serving South African Communities",
                 Font = new Font("Segoe UI", 9, FontStyle.Regular),
                 ForeColor = Color.FromArgb(117, 117, 117),
-                Size = new Size(860, 30),
+                Size = new Size(960, 30),
                 Location = new Point(10, 5),
                 BackColor = Color.Transparent,
                 TextAlign = ContentAlignment.MiddleCenter
@@ -175,14 +229,14 @@ namespace MunicipalServiceApp
         {
             Button serviceButton = new Button
             {
-                Size = new Size(320, 140),
+                Size = new Size(280, 140),
                 Location = location,
                 BackColor = backColor,
                 FlatStyle = FlatStyle.Flat,
                 Cursor = enabled ? Cursors.Hand : Cursors.Default,
                 Enabled = enabled,
                 Text = $"{title}\n\n{description}\n\n{(enabled ? "Available" : "Coming Soon")}",
-                Font = new Font("Segoe UI", 10, FontStyle.Regular),
+                Font = new Font("Segoe UI", 11, FontStyle.Bold),
                 ForeColor = Color.White,
                 TextAlign = ContentAlignment.TopLeft,
                 Padding = new Padding(15)
@@ -190,13 +244,28 @@ namespace MunicipalServiceApp
 
             serviceButton.FlatAppearance.BorderSize = 0;
             
+            // Enhanced hover effects
             if (enabled)
             {
-                serviceButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(
-                    Math.Min(255, backColor.R + 20),
-                    Math.Min(255, backColor.G + 20),
-                    Math.Min(255, backColor.B + 20)
+                Color hoverColor = Color.FromArgb(
+                    Math.Min(255, backColor.R + 30),
+                    Math.Min(255, backColor.G + 30),
+                    Math.Min(255, backColor.B + 30)
                 );
+                serviceButton.FlatAppearance.MouseOverBackColor = hoverColor;
+                
+                // Add smooth hover animation
+                serviceButton.MouseEnter += (s, e) =>
+                {
+                    serviceButton.Size = new Size(285, 145);
+                    serviceButton.Location = new Point(location.X - 2, location.Y - 2);
+                };
+                
+                serviceButton.MouseLeave += (s, e) =>
+                {
+                    serviceButton.Size = new Size(280, 140);
+                    serviceButton.Location = location;
+                };
             }
 
             return serviceButton;
@@ -221,6 +290,25 @@ namespace MunicipalServiceApp
                 "This application helps citizens engage with municipal services efficiently.";
 
             MessageBox.Show(helpMessage, "Help & Support", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ViewReportsBtn_Click(object sender, EventArgs e)
+        {
+            ViewReportsForm viewReportsForm = new ViewReportsForm();
+            viewReportsForm.ShowDialog();
+        }
+
+        private void EmergencyBtn_Click(object sender, EventArgs e)
+        {
+            string emergencyMessage = "🚑 Emergency Services Contacts\n\n" +
+                "Police: 10111\n" +
+                "Fire & Rescue: 10177\n" +
+                "Ambulance: 10177\n" +
+                "Municipal Emergency: 0860 103 089\n\n" +
+                "For life-threatening emergencies, call immediately!\n" +
+                "For non-urgent municipal issues, please use the Report Issues feature.";
+
+            MessageBox.Show(emergencyMessage, "Emergency Services", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void RefreshStatistics()

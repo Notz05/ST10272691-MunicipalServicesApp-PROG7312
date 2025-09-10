@@ -16,6 +16,15 @@ namespace MunicipalServiceApp
         private Timer progressTimer;
         private int progressStep;
 
+        // White and blue color palette
+        private readonly Color DarkBlue = Color.FromArgb(13, 71, 161);      // Dark blue
+        private readonly Color MediumBlue = Color.FromArgb(25, 118, 210);   // Medium blue
+        private readonly Color LightBlue = Color.FromArgb(33, 150, 243);    // Light blue
+        private readonly Color AccentBlue = Color.FromArgb(63, 81, 181);    // Accent blue
+        private readonly Color PureWhite = Color.White;                     // Pure white
+        private readonly Color LightGray = Color.FromArgb(245, 245, 245);
+        private readonly Color DarkText = Color.FromArgb(33, 33, 33);
+
         // Form controls
         private TextBox locationTextBox;
         private ComboBox categoryComboBox;
@@ -36,18 +45,27 @@ namespace MunicipalServiceApp
         {
             // Set form properties
             this.Text = "Report Municipal Issues";
-            this.Size = new Size(800, 750);
+            this.Size = new Size(800, 800);
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.BackColor = Color.FromArgb(240, 248, 255);
+            this.BackColor = Color.FromArgb(248, 250, 252);
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
 
             // Create header panel
             Panel headerPanel = new Panel
             {
-                Size = new Size(780, 80),
+                Size = new Size(980, 80),
                 Location = new Point(10, 10),
-                BackColor = Color.FromArgb(25, 118, 210),
+                BackColor = DarkBlue,
+                BorderStyle = BorderStyle.None
+            };
+
+            // Add blue accent bar
+            Panel accentBar = new Panel
+            {
+                Size = new Size(980, 4),
+                Location = new Point(0, 0),
+                BackColor = LightBlue,
                 BorderStyle = BorderStyle.None
             };
 
@@ -65,13 +83,13 @@ namespace MunicipalServiceApp
             {
                 Text = "Help us improve your community by reporting issues",
                 Font = new Font("Segoe UI", 11, FontStyle.Regular),
-                ForeColor = Color.FromArgb(200, 230, 255),
+                ForeColor = Color.FromArgb(200, 255, 200),
                 Size = new Size(400, 25),
                 Location = new Point(20, 45),
                 BackColor = Color.Transparent
             };
 
-            headerPanel.Controls.AddRange(new Control[] { headerLabel, headerSubLabel });
+            headerPanel.Controls.AddRange(new Control[] { accentBar, headerLabel, headerSubLabel });
 
             // Create main content panel
             Panel contentPanel = new Panel
@@ -179,15 +197,16 @@ namespace MunicipalServiceApp
             attachFileButton = new Button
             {
                 Text = "Choose File",
-                Font = new Font("Segoe UI", 10, FontStyle.Regular),
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
                 Size = new Size(120, 35),
                 Location = new Point(30, 430),
-                BackColor = Color.FromArgb(33, 150, 243),
+                BackColor = LightBlue,
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
                 Cursor = Cursors.Hand
             };
             attachFileButton.FlatAppearance.BorderSize = 0;
+            attachFileButton.FlatAppearance.MouseOverBackColor = AccentBlue;
             attachFileButton.Click += AttachFileButton_Click;
 
             attachedFileLabel = new Label
@@ -232,7 +251,7 @@ namespace MunicipalServiceApp
             Panel buttonPanel = new Panel
             {
                 Size = new Size(780, 60),
-                Location = new Point(10, 680),
+                Location = new Point(10, 710),
                 BackColor = Color.FromArgb(245, 245, 245),
                 BorderStyle = BorderStyle.FixedSingle
             };
@@ -254,15 +273,18 @@ namespace MunicipalServiceApp
             submitButton = new Button
             {
                 Text = "Submit Issue Report",
-                Font = new Font("Segoe UI", 11, FontStyle.Bold),
-                Size = new Size(180, 40),
-                Location = new Point(580, 10),
-                BackColor = Color.FromArgb(76, 175, 80),
+                Font = new Font("Segoe UI", 12, FontStyle.Bold),
+                Size = new Size(200, 40),
+                Location = new Point(300, 10),
+                BackColor = LightBlue,
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
                 Cursor = Cursors.Hand
             };
+
             submitButton.FlatAppearance.BorderSize = 0;
+            submitButton.FlatAppearance.MouseOverBackColor = MediumBlue;
+            submitButton.FlatAppearance.MouseDownBackColor = DarkBlue;
             submitButton.Click += SubmitButton_Click;
 
             buttonPanel.Controls.AddRange(new Control[] { backButton, submitButton });
